@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public class SectionPageAdapter extends FragmentPagerAdapter {
 
-        String fragments[] = {"Deals", "Account", "Settings"};
+        String fragments[] = {"Home", "Shelf", "Wishlist"};
 
         SectionPageAdapter(FragmentManager fm) {
             super(fm);
