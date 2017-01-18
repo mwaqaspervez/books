@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.mwaqaspervez.books.R;
 
-public class MapsFragment extends Fragment {
+public class MarketPlace extends Fragment {
 
 
     @Nullable

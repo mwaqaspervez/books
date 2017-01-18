@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.mwaqaspervez.books.R;
 
-public class AccountFragment extends Fragment {
+public class BookShelf extends Fragment {
 
 
     @Nullable

@@ -1,4 +1,4 @@
-package com.mwaqaspervez.books;
+package com.mwaqaspervez.books.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,9 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.mwaqaspervez.books.Fragments.AccountFragment;
+import com.mwaqaspervez.books.Fragments.BookShelf;
 import com.mwaqaspervez.books.Fragments.HomeFragment;
-import com.mwaqaspervez.books.Fragments.MapsFragment;
+import com.mwaqaspervez.books.Fragments.MarketPlace;
+import com.mwaqaspervez.books.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(mViewPager);
 
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -55,9 +58,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public class SectionPageAdapter extends FragmentPagerAdapter {
+     class SectionPageAdapter extends FragmentPagerAdapter {
 
-        String fragments[] = {"Home", "Shelf", "Wishlist"};
+        String fragments[] = {"Home", "Market", "Shelf"};
 
         SectionPageAdapter(FragmentManager fm) {
             super(fm);
@@ -75,9 +78,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case 0:
                     return new HomeFragment();
                 case 2:
-                    return new MapsFragment();
+                    return new MarketPlace();
                 case 1:
-                    return new AccountFragment();
+                    return new BookShelf();
                 default:
                     return null;
             }
