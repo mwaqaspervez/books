@@ -1,64 +1,79 @@
 package com.mwaqaspervez.books.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.view.Gravity;
+import android.view.View;
 
 import com.mwaqaspervez.books.Fragments.BookShelf;
 import com.mwaqaspervez.books.Fragments.HomeFragment;
 import com.mwaqaspervez.books.Fragments.MarketPlace;
 import com.mwaqaspervez.books.R;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-    private DrawerLayout mDrawerLayout;
+public class MainActivity extends AppCompatActivity {
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+
+    @OnClick({R.id.main_search})
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.main_search:
+                startActivity(new Intent(this, SearchActivity.class));
+                break;
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        SectionPageAdapter mSectionsPagerAdapter = new SectionPageAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setAdapter(new SectionPageAdapter(getSupportFragmentManager()));
 
         // Set up the tabs for ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(mViewPager);
+        ((TabLayout) findViewById(R.id.tabLayout)).setupWithViewPager(mViewPager);
 
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START))
+            drawer.closeDrawer(Gravity.LEFT);
+        else
+            super.onBackPressed();
     }
 
-
-     class SectionPageAdapter extends FragmentPagerAdapter {
+    private class SectionPageAdapter extends FragmentPagerAdapter {
 
         String fragments[] = {"Home", "Market", "Shelf"};
 
