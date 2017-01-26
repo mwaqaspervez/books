@@ -35,6 +35,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile 'com.itextpdf:itextg:5.5.10'
     compile 'com.tom_roush:pdfbox-android:1.8.9.1'
     testCompile 'junit:junit:4.12'
 }
